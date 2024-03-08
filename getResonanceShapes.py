@@ -80,6 +80,8 @@ def LineShapePDF(shapes, mass, histo):
 
             integral = interpolator.Integ(xlow, xhigh)
             histo.SetBinContent( i, (integral if integral >= 0. else 0.) )
+	    #err = (float((xhigh-xlow)*(xhigh-xlow))/8.)*interpolator.Deriv2(float(xhigh-xlow)/2.)
+	    #histo.SetBinError( i,  err )
         else:
             histo.SetBinContent(i, 0.)
 
@@ -172,10 +174,14 @@ def main():
 
        print "Producing %s shape for m = %i GeV"%(args.final_state, int(mass))
 
-       histname = "h_" + args.final_state + "_" + str(int(mass))
+       alpha=0.25
+       Chi=int(mass*alpha)
+       histname = "h_" + args.final_state + "_Suu" + str(int(mass)) + "_Chi%i"%(Chi)
+       #histname = "h_" + args.final_state + "_Suu" + str(int(mass)) + "_alpha%.2f"%(alpha)
 
-       h_shape = ( TH1D(histname, args.final_state + " Resonance Shape", 14000, 0, 14000) if args.fineBinning else TH1D(histname, args.final_state + " Resonance Shape", len(binBoundaries)-1, array('d',binBoundaries)) )
-       h_shape.SetXTitle("Dijet Mass [GeV]")
+       h_shape = ( TH1D(histname, args.final_state + " Resonance Shape", 13999, 1, 14000) if args.fineBinning else TH1D(histname, args.final_state + " Resonance Shape", len(binBoundaries)-1, array('d',binBoundaries)) )
+       h_shape.Sumw2()
+       h_shape.SetXTitle("Fourjet Mass [GeV]")
        h_shape.SetYTitle("Probability")
 
        # interpolate resonance shape
