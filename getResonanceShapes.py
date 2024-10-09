@@ -13,18 +13,18 @@ class ShapeStorage:
         self.binxcenters = binxcenters
 
         if len(self.shapes) < 2:
-           print "** ERROR: ** Need at least 2 input shapes, %i provided. Aborting."%(len(self.shapes))
+           print ("** ERROR: ** Need at least 2 input shapes, %i provided. Aborting."%(len(self.shapes)))
            sys.exit(1)
         nbins = []
         nbins.append(len(self.binxcenters))
         for key in self.shapes.keys():
             norm = sum(self.shapes[key])
             if abs(norm - 1.) > 0.01:
-                print "** ERROR: ** Input shape for m =", key, "GeV not normalized. Make sure the input shapes are normalized to unity. Aborting."
+                print ("** ERROR: ** Input shape for m =", key, "GeV not normalized. Make sure the input shapes are normalized to unity. Aborting.")
                 sys.exit(3)
             nbins.append(len(self.shapes[key]))
         if len(set(nbins)) > 1:
-           print "** ERROR: ** Numbers of bins for different input shapes and the number of bin centers are not all identical. Aborting."
+           print ("** ERROR: ** Numbers of bins for different input shapes and the number of bin centers are not all identical. Aborting.")
            sys.exit(2)
 
 
@@ -45,13 +45,13 @@ def LineShapePDF(shapes, mass, histo):
         mh = mass
         yh = np.array([])
         if mass < min_mass:
-            print "** WARNING: ** Attempting to extrapolate below the lowest input mass. The extrapolated shape(s) might not be reliable."
+            print ("** WARNING: ** Attempting to extrapolate below the lowest input mass. The extrapolated shape(s) might not be reliable.")
             m_temp = input_masses
             m_temp.sort()
             ml = m_temp[0]
             mh = m_temp[1]
         elif mass > max_mass:
-            print "** WARNING: ** Attempting to extrapolate above the highest input mass. The extrapolated shape(s) might not be reliable."
+            print ("** WARNING: ** Attempting to extrapolate above the highest input mass. The extrapolated shape(s) might not be reliable.")
             m_temp = input_masses
             m_temp.sort(reverse=True)
             ml = m_temp[1]
@@ -90,7 +90,7 @@ def LineShapePDF(shapes, mass, histo):
 
 def main():
     # usage description
-    usage = "Example: ./getResonanceShapes.py -i inputs/input_shapes_qq_13TeV_PU20_Phys14.py -f qq --massrange 400 10000 100 -o ResonanceShapes_qq_13TeV_PU20_Phys14.root"
+    usage = "Example: ./getResonanceShapes.py -i inputs/input_shapes_qq_13TeV_PU20_Phys14.py -f qq --massrange 400 10000 100 -o ResonanceShapes_qq_13TeV_PU20_Phys14.root --alpha 0.25"
 
     # input parameters
     parser = ArgumentParser(description='Resonance shape interpolation code based on vertical template morphing',epilog=usage)
@@ -112,6 +112,8 @@ def main():
     parser.add_argument("--storePDF", dest="storePDF", default=False, action="store_true", help="Also store a 1-GeV-binned PDF")
 
     parser.add_argument("--storeCDF", dest="storeCDF", default=False, action="store_true", help="Also store a 1-GeV-binned CDF")
+
+    parser.add_argument("--alpha", dest="alpha", type=float, default=0.25, help="Alpha value for resonance shape calculation (default: %(default)s)")
 
     mass_group = parser.add_mutually_exclusive_group(required=True)
     mass_group.add_argument("--mass",
@@ -145,7 +147,7 @@ def main():
         354, 386, 419, 453, 489, 526, 565, 606, 649, 693, 740, 788, 838, 890, 944, 1000, 1058, 1118, 1181, 1246, 1313, 1383, 1455, 1530, 1607, 1687,
         1770, 1856, 1945, 2037, 2132, 2231, 2332, 2438, 2546, 2659, 2775, 2895, 3019, 3147, 3279, 3416, 3558, 3704, 3854, 4010, 4171, 4337, 4509,
         4686, 4869, 5058, 5253, 5455, 5663, 5877, 6099, 6328, 6564, 6808, 7060, 7320, 7589, 7866, 8152, 8447, 8752, 9067, 9391, 9726, 10072, 10430, 
-        10798, 11179, 11571, 11977, 12395, 12827, 13272, 13732, 14000]
+        10798, 11179, 11571, 11977, 12395, 12827, 13272, 13732, 14000]          
 
     # initialize shape storage
     shapes = ShapeStorage(input_shapes.shapes,input_shapes.binxcenters)
@@ -158,7 +160,7 @@ def main():
         masses = range(MIN, MAX+STEP, STEP)
     elif args.masslist != None:
         # A mass list was provided
-        print  "Will create mass list according to", args.massdict
+        print  ("Will create mass list according to", args.massdict)
         masslist = __import__(args.masslist.replace(".py",""))
         masses = masslist.masses
     else:
@@ -172,10 +174,11 @@ def main():
 
     for mass in masses:
 
-       print "Producing %s shape for m = %i GeV"%(args.final_state, int(mass))
+       alpha=args.alpha
+       Chi=mass*alpha*1.
 
-       alpha=0.25
-       Chi=int(mass*alpha)
+       #print ("Producing %s shape for Suu = %.0f GeV, Chi = %.0f, alpha = %.2f"%(args.final_state, mass, Chi, alpha))
+
        histname = "h_" + args.final_state + "_Suu" + str(int(mass)) + "_Chi%i"%(Chi)
        #histname = "h_" + args.final_state + "_Suu" + str(int(mass)) + "_alpha%.2f"%(alpha)
 

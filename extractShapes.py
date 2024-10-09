@@ -44,7 +44,7 @@ def main():
         hName = directory.GetListOfKeys()[h].GetName()
         mass = int(hName.split('_')[2].replace('Suu',''))
 
-        if args.debug: print "Extracting shapes for Suu m =", mass, "GeV..."
+        if args.debug: print ("Extracting shapes for Suu m =", mass, "GeV...")
 
         histo = directory.Get(hName)
 
@@ -60,17 +60,17 @@ def main():
 
         shapes[mass] = normbincontents.tolist()
 
-    if args.debug: print ""
-    if args.debug: print "Extracted shapes:"
-    if args.debug: print ""
-    print "shapes = {\n"
+    if args.debug: print ("")
+    if args.debug: print ("Extracted shapes:")
+    if args.debug: print ("")
+    print ("shapes = {\n")
     for key, value in sorted(shapes.items()):
         print("  {} : {},".format(key, value))
-        print ""
-    print "}"
-    print ""
-    print "binxcenters =", binxcenters
-    print ""
+        print ("")
+    print ("}")
+    print ("")
+    print ("binxcenters =", binxcenters)
+    print ("")
 
 
 if __name__ == '__main__':
