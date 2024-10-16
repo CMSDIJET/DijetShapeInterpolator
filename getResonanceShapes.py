@@ -46,14 +46,16 @@ def LineShapePDF(shapes, mass, histo):
         yh = np.array([])
         if mass < min_mass:
             print ("** WARNING: ** Attempting to extrapolate below the lowest input mass. The extrapolated shape(s) might not be reliable.")
-            m_temp = input_masses
-            m_temp.sort()
+            #m_temp = input_masses
+            #m_temp.sort()
+            m_temp = sorted(list(input_masses))  #works in python3
             ml = m_temp[0]
             mh = m_temp[1]
         elif mass > max_mass:
             print ("** WARNING: ** Attempting to extrapolate above the highest input mass. The extrapolated shape(s) might not be reliable.")
-            m_temp = input_masses
-            m_temp.sort(reverse=True)
+            #m_temp = input_masses
+            #m_temp.sort(reverse=True)
+            m_temp = sorted(list(input_masses), reverse=True)  #works in python3
             ml = m_temp[1]
             mh = m_temp[0]
         else:
@@ -167,7 +169,8 @@ def main():
         masses = args.mass
 
     # sort masses
-    masses.sort()
+    #masses.sort()
+    masses = sorted(list(masses))  #works in python3
 
     # output ROOT file
     output = TFile(args.output_file,"RECREATE")
@@ -179,7 +182,7 @@ def main():
 
        #print ("Producing %s shape for Suu = %.0f GeV, Chi = %.0f, alpha = %.2f"%(args.final_state, mass, Chi, alpha))
 
-       histname = "h_" + args.final_state + "_Suu" + str(int(mass)) + "_Chi%i"%(Chi)
+       histname = "h_" + args.final_state + "_Suu" + str(int(mass)) + "_Chi%.0f"%(Chi)
        #histname = "h_" + args.final_state + "_Suu" + str(int(mass)) + "_alpha%.2f"%(alpha)
 
        h_shape = ( TH1D(histname, args.final_state + " Resonance Shape", 13999, 1, 14000) if args.fineBinning else TH1D(histname, args.final_state + " Resonance Shape", len(binBoundaries)-1, array('d',binBoundaries)) )

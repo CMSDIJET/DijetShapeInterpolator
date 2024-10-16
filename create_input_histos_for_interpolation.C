@@ -18,10 +18,9 @@
 #include "TROOT.h"
 #include "TH1.h"
 
-void create_input_histos_for_interpolation(double width, double alpha_true){
+void create_input_histos_for_interpolation(double width, double alpha_true, char type[1024]){
 
 char width_name[1024];
-if (width==0.0043) sprintf(width_name,"0p0043");
 if (width==0.015) sprintf(width_name,"0p015");
 if (width==0.05) sprintf(width_name,"0p05");
 if (width==0.1) sprintf(width_name,"0p1");
@@ -32,20 +31,20 @@ sprintf(alpha_name, "0p%.0f",alphap);
   	
 char foutname[1024], foutname1[1024], foutname2[1024], foutname3[1024], foutname4[1024], foutname5[1024], foutname6[1024], foutname7[1024], foutname8[1024], foutname9[1024], foutname10[1024], foutname11[1024], foutname12[1024], foutname13[1024];
 
-sprintf(foutname, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphagt0p1.root", alpha_name, alpha_name, width_name);
-sprintf(foutname1, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin1.root", alpha_name, alpha_name, width_name);
-sprintf(foutname2, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin2.root", alpha_name, alpha_name, width_name);
-sprintf(foutname3, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin3.root", alpha_name, alpha_name, width_name);
-sprintf(foutname4, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin4.root", alpha_name, alpha_name, width_name);
-sprintf(foutname5, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin5.root", alpha_name, alpha_name, width_name);
-sprintf(foutname6, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin6.root", alpha_name, alpha_name, width_name);
-sprintf(foutname7, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin7.root", alpha_name, alpha_name, width_name);
-sprintf(foutname8, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin8.root", alpha_name, alpha_name, width_name);
-sprintf(foutname9, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin9.root", alpha_name, alpha_name, width_name);
-sprintf(foutname10, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin10.root", alpha_name, alpha_name, width_name);
-sprintf(foutname11, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin11.root", alpha_name, alpha_name, width_name);
-sprintf(foutname12, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin12.root", alpha_name, alpha_name, width_name);
-sprintf(foutname13, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_NOMINAL_alpha%s_W-%s_alphabin13.root", alpha_name, alpha_name, width_name);
+sprintf(foutname, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphagt0p1.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname1, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin1.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname2, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin2.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname3, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin3.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname4, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin4.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname5, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin5.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname6, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin6.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname7, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin7.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname8, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin8.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname9, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin9.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname10, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin10.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname11, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin11.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname12, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin12.root", alpha_name, type, alpha_name, width_name);
+sprintf(foutname13, "/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/interpolation/inputs/alpha%s/InputShapes_%s_alpha%s_W-%s_alphabin13.root", alpha_name, type, alpha_name, width_name);
 
 TFile *fout = new TFile (foutname,"recreate");
 TFile *fout1 = new TFile (foutname1,"recreate");
@@ -64,25 +63,18 @@ TFile *fout13 = new TFile (foutname13,"recreate");
 
 double FourjetMass, Maverage, Masymmetry, DeltaEtaJJAK4, DeltaRAK4_First, DeltaRAK4_Second, alpha;
 
-const int Suu_masses_length = 12;
-double Suu_masses[Suu_masses_length] = {2000, 3000, 4000, 5000, 6000, 7000, 8000, 8400, 8600, 9000, 10000, 11000};
+//const int Suu_masses_length = 12;
+//double Suu_masses[Suu_masses_length] = {2000, 3000, 4000, 5000, 6000, 7000, 8000, 8400, 8600, 9000, 10000, 11000};
+
+const int Suu_masses_length = 10;
+double Suu_masses[Suu_masses_length] = {2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000};
 
 Char_t filechain[1024];
 	
 for (int mass_idx = 0; mass_idx < Suu_masses_length; mass_idx++)
 {
-	if(width!=0.0043) 
-	{
-		sprintf(filechain,"root:://eoscms//eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/reduced_trees/Suu_Diquarks/RunIISummer20UL18MiniAODv2/JEC_Summer20UL18_MC_NOMINAL/RunIISummer20UL18_Suu-Diquark_W-%s_S-%.0f_chi-%.0f__AK4CHS_reduced_skim.root", width_name, Suu_masses[mass_idx], Suu_masses[mass_idx]*alpha_true); 
-	}
-	else if(width==0.0043 && Suu_masses[mass_idx]!=10000 && Suu_masses[mass_idx]!=11000)
-	{
-		sprintf(filechain,"root:://eoscms//eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Narrow_Resonance_Search/reduced_trees/Suu_Diquarks/RunIIFall17MiniAODv2/MC2017_Suu_Diquark_S%.0f_chi%.0f_reduced_skim.root", Suu_masses[mass_idx], Suu_masses[mass_idx]*alpha_true);
-	}
-	else
-	{
-		sprintf(filechain,"root:://eoscms//eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Narrow_Resonance_Search/reduced_trees/Suu_Diquarks/RunIIFall17MiniAODv2/Summer20UL18_Suu_Diquark_S%.0f_chi%.0f_reduced_skim.root", Suu_masses[mass_idx], Suu_masses[mass_idx]*alpha_true);
-	}
+
+	sprintf(filechain,"/eos/cms/store/group/phys_exotica/dijet/Dijet13TeV/ilias/4jets_Run2/Wide_Resonance_Search/reduced_trees/Suu_Diquarks/RunIISummer20UL18MiniAODv2/JEC_Summer20UL18_MC_%s/RunIISummer20UL18_Suu-Diquark_W-%s_S-%.0f_chi-%.0f__AK4CHS_reduced_skim.root", type, width_name, Suu_masses[mass_idx], Suu_masses[mass_idx]*alpha_true); 	
 
 
 	TFile *f = new TFile(filechain,"READ");
@@ -124,24 +116,13 @@ for (int mass_idx = 0; mass_idx < Suu_masses_length; mass_idx++)
 
 		TTree *tree = (TTree*)(f->Get("rootTupleTree/tree"));
 
-		if(width!=0.0043 || Suu_masses[mass_idx]==10000 || Suu_masses[mass_idx]==11000)
-		{
-			tree->SetBranchAddress("FourjetMassAK4CHS",&FourjetMass);
-  			tree->SetBranchAddress("MaverageAK4CHS",&Maverage);
-  			tree->SetBranchAddress("MasymmetryAK4CHS",&Masymmetry);
-  			tree->SetBranchAddress("DeltaEtaJJAK4CHS",&DeltaEtaJJAK4);
-  			tree->SetBranchAddress("DeltaRAK4CHS_First",&DeltaRAK4_First);
-  			tree->SetBranchAddress("DeltaRAK4CHS_Second",&DeltaRAK4_Second);
-	   	}
-		else
-		{
-			tree->SetBranchAddress("FourjetMass",&FourjetMass);
-  			tree->SetBranchAddress("Maverage",&Maverage);
-  			tree->SetBranchAddress("Masymmetry",&Masymmetry);
-  			tree->SetBranchAddress("DeltaEtaJJAK4",&DeltaEtaJJAK4);
-  			tree->SetBranchAddress("DeltaRAK4_First",&DeltaRAK4_First);
-  			tree->SetBranchAddress("DeltaRAK4_Second",&DeltaRAK4_Second);
-		}
+		tree->SetBranchAddress("FourjetMassAK4CHS",&FourjetMass);
+  		tree->SetBranchAddress("MaverageAK4CHS",&Maverage);
+  		tree->SetBranchAddress("MasymmetryAK4CHS",&Masymmetry);
+  		tree->SetBranchAddress("DeltaEtaJJAK4CHS",&DeltaEtaJJAK4);
+  		tree->SetBranchAddress("DeltaRAK4CHS_First",&DeltaRAK4_First);
+  		tree->SetBranchAddress("DeltaRAK4CHS_Second",&DeltaRAK4_Second);
+	   	
 
 		int nentries=(Int_t)tree->GetEntries(); 
 		std::cout<<"Number of entries =  "<<nentries<<std::endl;
@@ -245,7 +226,20 @@ for (int mass_idx = 0; mass_idx < Suu_masses_length; mass_idx++)
 		h_mass13->Scale(1./h_mass13->Integral());
 		h_mass13->Write();
 
-		delete h_mass, h_mass1, h_mass2, h_mass3, h_mass4, h_mass5, h_mass6, h_mass7, h_mass8, h_mass9, h_mass10, h_mass11, h_mass12, h_mass13;
+		delete h_mass;
+		delete h_mass1;
+		delete h_mass2;
+		delete h_mass3;
+		delete h_mass4;
+		delete h_mass5;
+		delete h_mass6;
+		delete h_mass7;
+		delete h_mass8;
+		delete h_mass9;
+		delete h_mass10;
+		delete h_mass11;
+		delete h_mass12;
+		delete h_mass13;
 	}
 }
 	
