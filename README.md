@@ -2,12 +2,9 @@
 
 ## Relevant presentations
 
-```
 [https://indico.cern.ch/event/1423346/contributions/5991064/attachments/2870675/5025746/2024_06_04_DijetAnalysisMeeting_WideResonances_Interpolation_JES_JER_syst.pdf]([https://example.com](https://indico.cern.ch/event/1423346/contributions/5991064/attachments/2870675/5025746/2024_06_04_DijetAnalysisMeeting_WideResonances_Interpolation_JES_JER_syst.pdf))
 
 [https://indico.cern.ch/event/1083909/contributions/4557836/attachments/2322649/3955487/Interpolation_RPV_nonres_05_10_2021.pdf]{https://indico.cern.ch/event/1083909/contributions/4557836/attachments/2322649/3955487/Interpolation_RPV_nonres_05_10_2021.pdf}
-
-```
 
 ## Setup instructions
 
